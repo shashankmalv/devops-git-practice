@@ -25,14 +25,16 @@ This is a living document of the Git commands learned during the **#90DaysOfDevO
 - `git merge <branch>` — Combine changes from another branch into the current one.
 - `git merge --squash <branch>` — Combine all commits from a branch into one single commit.
 - `git rebase <branch>` — Reapply commits on top of another base tip for a linear history.
-- `git branch -d <name>` — Delete a branch that has already been merged.
 
-## ⚡ Advanced Workflows
+## ⚡ Advanced Workflows & Undo
 - `git stash` — Temporarily shelve (stash) changes not yet ready to be committed.
 - `git stash pop` — Remove the most recent stash and apply it to the working directory.
-- `git stash apply` — Apply a stash to the working directory without removing it from the list.
-- `git stash list` — Show all currently stashed changes.
-- `git cherry-pick <commit-hash>` — Apply the changes introduced by an existing commit to the current branch.
+- `git cherry-pick <commit-hash>` — Apply the changes of a specific commit to the current branch.
+- `git reset --soft HEAD~1` — Undo last commit; keep changes staged.
+- `git reset --mixed HEAD~1` — Undo last commit; keep changes unstaged (default).
+- `git reset --hard HEAD~1` — Undo last commit and permanently delete all changes.
+- `git revert <commit-hash>` — Create a new commit that reverses the changes of a previous one.
+- `git reflog` — View a record of every time the HEAD was moved (the ultimate safety net).
 
 ## 🌐 Remote Repositories (GitHub)
 - `git remote add origin <url>` — Link your local repository to a remote repository on GitHub.
@@ -47,13 +49,11 @@ This is a living document of the Git commands learned during the **#90DaysOfDevO
 
 | Category | Command | Description |
 | :--- | :--- | :--- |
-| **Setup** | `git init` | Initializes a new local Git repository. |
-| **Status** | `git status` | Shows the state of the working directory and staging area. |
-| **Staging** | `git add <file>` | Adds changes to the staging area. |
-| **Undo** | `git restore --staged <file>` | Removes a file from the staging area. |
-| **Commit** | `git commit -m "msg"` | Saves staged changes as a new commit. |
-| **History** | `git log` | Displays the commit history. |
-| **Remote** | `git remote set-url origin` | Updates the remote repository URL (SSH/HTTPS). |
+| **Undo (Local)** | `git reset` | Moves branch pointer back; rewrites local history. |
+| **Undo (Public)** | `git revert` | Safely undoes changes by adding a new "inverse" commit. |
+| **Safety Net** | `git reflog` | Recovers lost commits or resets even after a --hard reset. |
+| **Remote** | `git remote set-url` | Updates the remote repository URL (SSH/HTTPS). |
+| **Cleanup** | `git merge --squash` | Condenses feature branch history into one commit. |
 
 ---
 *Last Updated: 2026-03-03*
